@@ -10,7 +10,7 @@ const io = socket(server);
 
 
 io.on('connection', socket => {
-    console.log('we have a connection')
+  console.log('connection est')
 })
 
 server.listen(PORT, () => {
