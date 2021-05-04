@@ -1,7 +1,9 @@
 const express = require('express');
+const { copyFileSync } = require('fs');
 const http = require('http');
 const { emit } = require('process');
 const socket = require('socket.io');
+const { createRoom, allRooms } = require('./utils/rooms')
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -27,6 +29,12 @@ io.on('connection', (socket) => {
     socket.on("disconnect", (data) => {
         console.log("User disconnected");
     });
+
+    // Create Room 
+    socket.on('create-room', (roomname) => {
+      const room = createRoom( socket.id, roomname)
+      socket.emit('create-room', room)
+    })
 })
 
 server.listen(PORT, () => {

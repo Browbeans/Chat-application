@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useEffect } from 'react'
 import { BrowserRouter } from "react-router-dom";
-import io from 'socket.io-client'
 import Layout from './Components/Layout';
+import io from 'socket.io-client'
 
 var connectionOptions =  {
   "force new connection" : true,
