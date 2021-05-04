@@ -1,9 +1,12 @@
 import React from 'react'
 
 function ChatRoom() {
+
     return (
-        <h1>ChatRoom</h1>
-    )
+      <div>
+        <h1>ChatRoom:</h1>
+      </div>
+    );
 }
 
 export default ChatRoom

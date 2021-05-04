@@ -10,9 +10,7 @@ function Layout() {
                 <Route exact path="/">
                     <StartPage/>
                 </Route>
-                <Route path="/chat">
-                    <ChatRoom/>
-                </Route>
+                <Route path="/chatRoom" component={ChatRoom}/>
             </Switch>
         </div>
     )
