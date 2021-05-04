@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router';
 import StartPage from "./StartPage";
-import ChatRoom from "./ChatRoom";
+import ChatRoom from "./Chatroom/ChatRoom";
 
 function Layout() {
     return (
