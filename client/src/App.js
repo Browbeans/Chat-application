@@ -1,6 +1,9 @@
 import './App.css';
 import React, { useEffect } from 'react'
+import { BrowserRouter } from "react-router-dom";
 import io from 'socket.io-client'
+import Layout from './Components/Layout';
+
 var connectionOptions =  {
   "force new connection" : true,
   "reconnectionAttempts": "Infinity", 
@@ -12,14 +15,12 @@ const socket = io('http://localhost:5000', connectionOptions);
 
 function App() {
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connection est')
-    })
+    socket.emit('connection', "Petter");
   })
   return (
-    <div className="App">
-    <h1>Hello world</h1>
-    </div>
+    <BrowserRouter>
+      <Layout/>
+    </BrowserRouter>
   );
 }
 
