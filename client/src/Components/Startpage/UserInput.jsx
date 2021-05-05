@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { SocketContext } from "../Chatroom/Contexts/SocketContext";
+import { SocketContext } from "../../Contexts/SocketContext";
 
 function UserInput() {
 
