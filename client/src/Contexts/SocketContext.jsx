@@ -11,15 +11,19 @@ let connectionOptions = {
 const socket = io("http://localhost:5000", connectionOptions);
 
 export const SocketContext = createContext({
-    joinRoom: (username, roomname) => {}
+  joinRoom: (username, roomname) => {},
+  createMessage: (message) => {}
 });
 
 class SocketProvider extends Component{
   
   joinRoomWithUsername = (username, roomname) => {
-
-       socket.emit("join-room", username, roomname);
+    socket.emit("join-room", username, roomname);
   }  
+
+  createMessageToSocket = (message) => {
+    socket.emit('chat-message', message)
+  }
 
   componentDidMount = () => {
     
@@ -33,7 +37,8 @@ class SocketProvider extends Component{
       <SocketContext.Provider
         value={{
           ...this.state,
-          joinRoom: this.joinRoomWithUsername
+          joinRoom: this.joinRoomWithUsername,
+          createMessage: this.createMessageToSocket
         }}
       >
         {this.props.children}
