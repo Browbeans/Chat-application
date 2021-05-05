@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import socketIOClient from "socket.io-client";
-
-const ENDPOINT = "http://localhost:5000";
-
-var connectionOptions = {
-  "force new connection": true,
-  reconnectionAttempts: "Infinity",
-  timeout: 10000,
-  transports: ["websocket"],
-};
+import { SocketContext } from "../Chatroom/Contexts/SocketContext";
 
 function UserInput() {
+
+  const socketContext = useContext(SocketContext);
+
   const [username, setUsername] = useState("");
   const [roomname, setRoomName] = useState("");
 
   const handleSubmit = (e) => {
     // e.preventDefault();
-    const socket = socketIOClient(ENDPOINT, connectionOptions);
-    socket.emit("username", username);
-    socket.emit("create-room", roomname);
+    socketContext.joinRoom(username, roomname);
   };
 
   return (
