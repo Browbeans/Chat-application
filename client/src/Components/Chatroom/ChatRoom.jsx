@@ -1,8 +1,13 @@
 import React from 'react'
+import RoomInfo from './RoomInfo'
+import Chat from './Chat'
 
 function ChatRoom() {
     return (
-        <h1>ChatRoom</h1>
+        <div>
+            <RoomInfo/>
+            <Chat/>
+        </div>
     )
 }
 
