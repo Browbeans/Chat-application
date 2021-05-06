@@ -11,7 +11,12 @@ const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 
+// var clients = {};
 
+// io.on('connection', function(socket){
+//     console.log('a user connected: ' + socket.id);
+
+//     clients[socket.id] = {name: 'Your name'};
 io.on('connection', (socket) => {
     // User connected
     console.log("User", "connected", socket.id);
@@ -19,18 +24,24 @@ io.on('connection', (socket) => {
 
     // User joined specific room
     socket.on("join-room", (username, room) => {
-        console.log("User joined room" + username, room);
+        const user = {
+            username, 
+            room
+        }
+        socket.join(room)
+        socket.emit('message', user) 
+        socket.broadcast.to(room).emit('user-joined', `${username} has joined the chat`)
     })
 
     // User wrote message
     socket.on("chat-message", (message) => {
-        console.log("User: " + message);
-        io.emit('message', formatMessage('Oliver', message))
+        io.to(message.room).emit('user-message', formatMessage(message)) 
+        console.log(message)
     });
 
     // User Disconnect
-    socket.on("disconnect", (data) => {
-        console.log("User disconnected");
+    socket.on("disconnect", () => {
+        console.log('dc')
     });
 
     // Create Room 
