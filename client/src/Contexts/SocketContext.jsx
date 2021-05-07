@@ -64,8 +64,8 @@ class SocketProvider extends Component {
     })
 
     socket.on('locked-room', (room) => {
-      const newLockedRoom = [...this.state.lockedRooms, room];
-      this.setState({lockedRooms: newLockedRoom})
+      // const newLockedRoom = [...this.state.lockedRooms, room];
+      this.setState({lockedRooms: room})
     })
 
     socket.on('user-message', (data) => {

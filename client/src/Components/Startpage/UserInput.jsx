@@ -13,23 +13,32 @@ function UserInput() {
 
 
   const lockedRoom = socketContext.joinLockedRoom();
-  const lockedRooms = socketContext.lockedRooms[0];
-  
-  const handleChange = (e) => {
+  const lockedRooms = socketContext.lockedRooms;
 
-    setRoomName(e.target.value);
-    if(e.target.value === lockedRooms.roomname){
+  const specificLockedRoomName = (e) => {
+    lockedRooms.forEach((lr) => {
+    if (e.target.value === lr.roomname) {
       setLocked(true);
     }
+  })};
+
+  const specificLockedRoomPassword = (e) => {
+    lockedRooms.forEach((lr) => {
+      if (e.target.value === lr.password) {
+        setLocked(false);
+      }
+    })};
+  
+  const handleChange = (e) => {
+    specificLockedRoomName(e);
+    setRoomName(e.target.value);
   }
 
   const handlePassword = (e) => {
+    specificLockedRoomPassword(e);
     setPassword(e.target.value);
-
-    if(e.target.value === lockedRooms.password){
-      setLocked(false);
-    }
   }
+
   const handleSubmit = (e) => {
     // e.preventDefault();
     socketContext.joinRoom(username, roomname);
