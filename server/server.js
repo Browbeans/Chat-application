@@ -5,6 +5,8 @@ const { emit } = require('process');
 const socket = require('socket.io');
 const { createRoom, allRooms, removeFromRoom } = require('./utils/rooms')
 const { userJoin, userLeave, getUser } = require('./utils/users')
+
+
 const formatMessage = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
 
@@ -37,6 +39,11 @@ io.on('connection', (socket) => {
     socket.on("chat-message", (message) => {
         io.to(message.room).emit('user-message', formatMessage(message)) 
     });
+
+    socket.on('locked', () => {
+        const room = allRooms()
+            io.emit('locked-room', room);
+    })
 
     // User Disconnect
     socket.on("disconnect", () => {
