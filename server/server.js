@@ -3,8 +3,8 @@ const { copyFileSync } = require('fs');
 const http = require('http');
 const { emit } = require('process');
 const socket = require('socket.io');
-const { createRoom } = require('./utils/rooms')
-const { userJoin, userLeave } = require('./utils/users')
+const { createRoom, allRooms, removeFromRoom } = require('./utils/rooms')
+const { userJoin, userLeave, getUser } = require('./utils/users')
 const formatMessage = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
 
@@ -20,7 +20,9 @@ io.on('connection', (socket) => {
 
     // User joined specific room
     socket.on("join-room", (username, room) => {
+        createRoom( socket.id, room, username)
         userJoin( socket.id, username, room)
+        io.emit('get-rooms', allRooms())
 
         const user = {
             username, 
@@ -34,22 +36,20 @@ io.on('connection', (socket) => {
     // User wrote message
     socket.on("chat-message", (message) => {
         io.to(message.room).emit('user-message', formatMessage(message)) 
-        console.log(message)
     });
 
     // User Disconnect
     socket.on("disconnect", () => {
         const user = userLeave(socket.id)
         if(user) {
+            console.log(removeFromRoom(user))
             io.to(user.room).emit('user-leave', user)
         }
     });
-
-    // Create Room 
-    socket.on('create-room', (roomname) => {
-      const room = createRoom( socket.id, roomname)
-      socket.emit('create-room', room)
-    })
+    
+    // Gets all existing rooms
+    io.emit('get-rooms', allRooms())
+   
 })
 
 server.listen(PORT, () => {
