@@ -3,7 +3,8 @@ const { copyFileSync } = require('fs');
 const http = require('http');
 const { emit } = require('process');
 const socket = require('socket.io');
-const { createRoom, allRooms } = require('./utils/rooms')
+const { createRoom } = require('./utils/rooms')
+const { userJoin, userLeave } = require('./utils/users')
 const formatMessage = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
 
@@ -11,12 +12,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 
-// var clients = {};
 
-// io.on('connection', function(socket){
-//     console.log('a user connected: ' + socket.id);
-
-//     clients[socket.id] = {name: 'Your name'};
 io.on('connection', (socket) => {
     // User connected
     console.log("User", "connected", socket.id);
@@ -24,6 +20,8 @@ io.on('connection', (socket) => {
 
     // User joined specific room
     socket.on("join-room", (username, room) => {
+        userJoin( socket.id, username, room)
+
         const user = {
             username, 
             room
@@ -41,7 +39,10 @@ io.on('connection', (socket) => {
 
     // User Disconnect
     socket.on("disconnect", () => {
-        console.log('dc')
+        const user = userLeave(socket.id)
+        if(user) {
+            io.to(user.room).emit('user-leave', user)
+        }
     });
 
     // Create Room 

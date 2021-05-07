@@ -40,10 +40,6 @@ class SocketProvider extends Component {
     }
     socket.emit('chat-message', (userObject))
   }
-  
-  // const newMessage = [...this.state.messages, message]
-  // this.setState({messages: newMessage})
-  // socket.emit('chat-message', (message))
  
   componentDidMount = () => {
 
@@ -57,18 +53,20 @@ class SocketProvider extends Component {
         join: response
       }
       const newUserMessage = [...this.state.messages, userJoined]
-      
       this.setState({messages: newUserMessage})
     })
 
     socket.on('user-message', (data) => {
-      console.log(data)
       const newUserMessage = [...this.state.messages, data]
       this.setState({messages: newUserMessage})
     })
 
-    socket.on('user-left', (data) => {
-      console.log(data)
+    socket.on('user-leave', (data) => {
+      const userJoined = {
+        name: data.username
+      }
+      const newUserMessage = [...this.state.messages, userJoined]
+      this.setState({messages: newUserMessage})
     })
   };
 

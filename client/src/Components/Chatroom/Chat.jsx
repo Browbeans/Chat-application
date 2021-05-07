@@ -25,7 +25,8 @@ function Chat() {
             
                 {socketContext.messages.map((msg, index) => (
                     <div key={index}>
-                        <p key={msg}>{msg.join}</p>
+                        <p key={msg.join}>{msg.join}</p>
+                        <p key={msg.name}>{msg.name}</p>
                         <p key={msg.username}>{msg.username}</p>
                         <p key={msg.time}>{msg.time}</p>
                         <p key={msg.text}>{msg.text}</p>
