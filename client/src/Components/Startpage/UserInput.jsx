@@ -12,10 +12,10 @@ function UserInput() {
   const [password, setPassword] = useState('');
 
 
+  const lockedRoom = socketContext.joinLockedRoom();
+  const lockedRooms = socketContext.lockedRooms[0];
+  
   const handleChange = (e) => {
-
-   const lockedRoom = socketContext.joinLockedRoom();
-   const lockedRooms = socketContext.lockedRooms[0];
 
     setRoomName(e.target.value);
     if(e.target.value === lockedRooms.roomname){
@@ -26,7 +26,7 @@ function UserInput() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
 
-    if(e.target.value === '123'){
+    if(e.target.value === lockedRooms.password){
       setLocked(false);
     }
   }
