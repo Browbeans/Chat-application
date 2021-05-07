@@ -18,11 +18,18 @@ function UserInput() {
       setLocked(true);
     }
   }
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+
+    if(e.target.value === '123'){
+      setLocked(false);
+    }
+  }
   const handleSubmit = (e) => {
     // e.preventDefault();
     socketContext.joinRoom(username, roomname);
   };
-
 
   return (
     <div>
@@ -44,13 +51,11 @@ function UserInput() {
             type="password"
             placeholder="Enter password"
             id="roomname"
-            onChange={e => {
-              setPassword(e.target.value);
-            }}
+            onChange={e => handlePassword(e)}
           />
         ) : null}
           {locked ? (
-            <button disabled style={notActive}>Enter password</button>
+            <button style={notActive}>Enter password</button>
           ) : (
              <Link
           onClick={handleSubmit}
