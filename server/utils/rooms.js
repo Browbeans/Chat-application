@@ -1,9 +1,10 @@
 const rooms = []
 
-function createRoom(id, roomname) {
+function createRoom(id, roomname, locked) {
     const room = { 
         id,
-        roomname
+        roomname,
+        locked,
     }
     rooms.push(room)
     return room

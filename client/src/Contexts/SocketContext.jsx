@@ -29,7 +29,7 @@ class SocketProvider extends Component {
 
   joinRoomWithUsername = (username, roomname) => {
     socket.emit("join-room", username, roomname);
-  }  
+  }
 
 
   createMessageToSocket = (message) => {
