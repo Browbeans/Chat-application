@@ -8,6 +8,36 @@ function UserInput() {
 
   const [username, setUsername] = useState("");
   const [roomname, setRoomName] = useState("");
+  const [locked, setLocked] = useState(false);
+  const [password, setPassword] = useState('');
+
+
+  const lockedRoom = socketContext.joinLockedRoom();
+  const lockedRooms = socketContext.lockedRooms;
+
+  const specificLockedRoomName = (e) => {
+    lockedRooms.forEach((lr) => {
+    if (e.target.value === lr.roomname) {
+      setLocked(true);
+    }
+  })};
+
+  const specificLockedRoomPassword = (e) => {
+    lockedRooms.forEach((lr) => {
+      if (e.target.value === lr.password) {
+        setLocked(false);
+      }
+    })};
+  
+  const handleChange = (e) => {
+    specificLockedRoomName(e);
+    setRoomName(e.target.value);
+  }
+
+  const handlePassword = (e) => {
+    specificLockedRoomPassword(e);
+    setPassword(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -27,19 +57,37 @@ function UserInput() {
           type="text"
           placeholder="Enter roomname"
           id="roomname"
-          onChange={(e) => {
-            setRoomName(e.target.value);
-          }}
+          onChange={e => handleChange(e)}
         />
-        <Link
+        {locked ? (
+          <input
+            type="password"
+            placeholder="Enter password"
+            id="roomname"
+            onChange={e => handlePassword(e)}
+          />
+        ) : null}
+          {locked ? (
+            <button style={notActive}>Enter password</button>
+          ) : (
+             <Link
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
-        >
-          <button>JOIN</button>
-        </Link>
+             >
+            <button style={active}>JOIN</button>
+            </Link>
+          )}
       </form>
     </div>
   );
 }
 
 export default UserInput;
+
+
+const active = {
+  background: 'green',
+}
+const notActive = {
+  background: "red",
+};

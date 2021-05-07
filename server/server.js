@@ -3,7 +3,7 @@ const { copyFileSync } = require('fs');
 const http = require('http');
 const { emit } = require('process');
 const socket = require('socket.io');
-const { createRoom } = require('./utils/rooms')
+const { createRoom, allRooms } = require('./utils/rooms')
 const { userJoin, userLeave } = require('./utils/users')
 const formatMessage = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
@@ -36,6 +36,11 @@ io.on('connection', (socket) => {
         io.to(message.room).emit('user-message', formatMessage(message)) 
         console.log(message)
     });
+
+    socket.on('locked', () => {
+        const room = allRooms()
+            io.emit('locked-room', room);
+    })
 
     // User Disconnect
     socket.on("disconnect", () => {
