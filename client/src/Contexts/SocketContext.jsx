@@ -11,6 +11,7 @@ let connectionOptions = {
 const socket = io("http://localhost:5000", connectionOptions);
 
 export const SocketContext = createContext({
+  allRooms: [],
   usersJoined: [],
   currentUserRoom: {},
   messages: [],
@@ -25,6 +26,7 @@ export const SocketContext = createContext({
 class SocketProvider extends Component {
   
   state = {
+    allRooms: [],
     currentUserRoom: {},
     messages: [],
     lockedRooms: [],
@@ -80,6 +82,11 @@ class SocketProvider extends Component {
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
     })
+
+    socket.on('get-rooms', (rooms) => {
+      this.setState({ allRooms: rooms })
+      console.log(this.state.allRooms)
+    })
   };
 
   componentDidUpdate = () => {
@@ -90,6 +97,7 @@ class SocketProvider extends Component {
     return (
       <SocketContext.Provider
         value={{
+          allRooms: this.state.allRooms,
           messages: this.state.messages,
           currentUserRoom: this.state.currentUserRoom,
           joinRoom: this.joinRoomWithUsername,

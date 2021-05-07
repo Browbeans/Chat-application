@@ -14,8 +14,16 @@ function userLeave(id) {
     }
 }
 
+function getUser(id) {
+    const index = users.findIndex(user => user.id === id)
+    if(index !== -1) {
+        return users[index].username
+    }
+}
+
 
 module.exports = {
     userJoin, 
-    userLeave
+    userLeave,
+    getUser
 }
