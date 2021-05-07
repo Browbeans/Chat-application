@@ -13,8 +13,12 @@ function UserInput() {
 
 
   const handleChange = (e) => {
+
+   const lockedRoom = socketContext.joinLockedRoom();
+   const lockedRooms = socketContext.lockedRooms[0];
+
     setRoomName(e.target.value);
-    if(e.target.value === 'stugan'){
+    if(e.target.value === lockedRooms.roomname){
       setLocked(true);
     }
   }

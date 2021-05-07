@@ -14,21 +14,28 @@ export const SocketContext = createContext({
   usersJoined: [],
   currentUserRoom: {},
   messages: [],
+  lockedRooms: [],
   joinRoom: (username, roomname) => {},
   createMessage: (message) => {},
   getMessage: () => {},
-  leaveRoom: () => {}
+  leaveRoom: () => {},
+  joinLockedRoom: () => {},
 });
 
 class SocketProvider extends Component {
   
   state = {
     currentUserRoom: {},
-    messages: []
+    messages: [],
+    lockedRooms: [],
   }
 
   joinRoomWithUsername = (username, roomname) => {
     socket.emit("join-room", username, roomname);
+  }
+
+  joinLockedRoom = () => {
+    socket.emit('locked')
   }
 
 
@@ -54,6 +61,11 @@ class SocketProvider extends Component {
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
+    })
+
+    socket.on('locked-room', (room) => {
+      const newLockedRoom = [...this.state.lockedRooms, room];
+      this.setState({lockedRooms: newLockedRoom})
     })
 
     socket.on('user-message', (data) => {
@@ -82,7 +94,9 @@ class SocketProvider extends Component {
           currentUserRoom: this.state.currentUserRoom,
           joinRoom: this.joinRoomWithUsername,
           createMessage: this.createMessageToSocket,
-          getMessage: this.getMessageFromSocket
+          getMessage: this.getMessageFromSocket,
+          lockedRooms: this.state.lockedRooms,
+          joinLockedRoom: this.joinLockedRoom,
         }}
       >
         {this.props.children}
