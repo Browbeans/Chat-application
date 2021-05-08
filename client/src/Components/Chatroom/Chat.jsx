@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
-
+import '../../style/ChatStyle.css'
 
 
 function Chat() {
@@ -15,14 +15,9 @@ function Chat() {
     }
 
     return(
-        <div style={rootStyle} id="chatDiv">
+        <div style={rootStyle} className="chat-container">
              <h2>{userMessage}</h2>
-             <input type="text" placeholder="Enter roomname" id="roomname" onChange={(e) => {
-                setMessage(e.target.value)
-            }}/>
-            <button onClick={createMessage}>Send message</button>
-            <div style={{height: '2rem'}}>
-            
+            <div>
                 {socketContext.messages.map((msg, index) => (
                     <div key={index}>
                         <p key={msg.join}>{msg.join}</p>
@@ -31,7 +26,13 @@ function Chat() {
                         <p key={msg.time}>{msg.time}</p>
                         <p key={msg.text}>{msg.text}</p>
                     </div>
-                    ))}
+                ))}
+            </div>
+            <div>
+                <input type="text" placeholder="Write message" id="roomname" onChange={(e) => {
+                    setMessage(e.target.value)
+                }}/>
+                <button onClick={createMessage}>Send message</button>
             </div>
         </div>
     )

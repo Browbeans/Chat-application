@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { SocketContext } from "../../Contexts/SocketContext";
+import '../../style/UserInput.css'
 
 function UserInput() {
 
@@ -12,32 +13,32 @@ function UserInput() {
   const [password, setPassword] = useState('');
 
 
-  const lockedRoom = socketContext.joinLockedRoom();
-  const lockedRooms = socketContext.lockedRooms;
+  // const lockedRoom = socketContext.joinLockedRoom();
+  // const lockedRooms = socketContext.lockedRooms;
 
-  const specificLockedRoomName = (e) => {
-    lockedRooms.forEach((lr) => {
-    if (e.target.value === lr.roomname) {
-      setLocked(true);
-    }
-  })};
+  // const specificLockedRoomName = (e) => {
+  //   lockedRooms.forEach((lr) => {
+  //   if (e.target.value === lr.roomname) {
+  //     setLocked(true);
+  //   }
+  // })};
 
-  const specificLockedRoomPassword = (e) => {
-    lockedRooms.forEach((lr) => {
-      if (e.target.value === lr.password) {
-        setLocked(false);
-      }
-    })};
+  // const specificLockedRoomPassword = (e) => {
+  //   lockedRooms.forEach((lr) => {
+  //     if (e.target.value === lr.password) {
+  //       setLocked(false);
+  //     }
+  //   })};
   
   const handleChange = (e) => {
-    specificLockedRoomName(e);
+    // specificLockedRoomName(e);
     setRoomName(e.target.value);
   }
 
-  const handlePassword = (e) => {
-    specificLockedRoomPassword(e);
-    setPassword(e.target.value);
-  }
+  // const handlePassword = (e) => {
+  //   specificLockedRoomPassword(e);
+  //   setPassword(e.target.value);
+  // }
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -45,8 +46,9 @@ function UserInput() {
   };
 
   return (
-    <div>
-      <form>
+    <div className ="user-container">
+      <h1>Welcome to ChatLine</h1>
+      <div className="input-container">
         <input
           type="text"
           placeholder="Your Name"
@@ -59,7 +61,7 @@ function UserInput() {
           id="roomname"
           onChange={e => handleChange(e)}
         />
-        {locked ? (
+        {/* {locked ? (
           <input
             type="password"
             placeholder="Enter password"
@@ -69,15 +71,15 @@ function UserInput() {
         ) : null}
           {locked ? (
             <button style={notActive}>Enter password</button>
-          ) : (
+          ) : ( */}
              <Link
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
              >
-            <button style={active}>JOIN</button>
+            <button>JOIN</button>
             </Link>
-          )}
-      </form>
+          {/* )} */}
+      </div>
     </div>
   );
 }

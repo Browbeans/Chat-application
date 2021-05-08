@@ -1,29 +1,27 @@
-const rooms = [
-  (room1 = {
-    roomname: "stugan",
-    locked: true,
-    password: "1234",
-  }),
-  (room2 = {
-    roomname: "bärsrummet",
-    locked: true,
-    password: "1111",
-  }),
-  (room3 = {
-    roomname: "katedralen",
-    locked: true,
-    password: "4444",
-  }),
+let rooms = [
+//   (room1 = {
+//     roomname: "stugan",
+//     locked: true,
+//     password: "1234",
+//   }),
+//   (room2 = {
+//     roomname: "bärsrummet",
+//     locked: true,
+//     password: "1111",
+//   }),
+//   (room3 = {
+//     roomname: "katedralen",
+//     locked: true,
+//     password: "4444",
+//   }),
 ];
 
-function createRoom(id, roomname, username, locked) {
+function createRoom(id, roomname, username) {
 
     const room = { 
         users: [],
         id,
-        roomname,
-        locked,
-        password, 
+        roomname, 
     }
 
     room.users.push(username)
@@ -48,13 +46,12 @@ function removeFromRoom(username) {
     rooms.map(user => {
         user.users.splice(user.users.indexOf(username.username, 1))
     })
-    
     removeRoom()
 }
 
 function removeRoom() {
     rooms.forEach(room => {
-        if(room.users.length === 0){
+         if(room.users.length < 1){
             rooms.splice(rooms.indexOf(room), 1)
         }
     })

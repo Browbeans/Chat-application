@@ -1,0 +1,11 @@
+.current-rooms {
+    width: 14rem;
+    background: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    color: #22EAAA;
+    padding: 1rem;
+}
+
+.current-rooms ul {
+   padding: 0; 
+}
