@@ -11,6 +11,7 @@ let connectionOptions = {
 const socket = io("http://localhost:5000", connectionOptions);
 
 export const SocketContext = createContext({
+  userName: '',
   allRooms: [],
   usersJoined: [],
   currentUserRoom: {},
@@ -21,15 +22,21 @@ export const SocketContext = createContext({
   getMessage: () => {},
   leaveRoom: () => {},
   joinLockedRoom: () => {},
+  handleUserName: () => {}
 });
 
 class SocketProvider extends Component {
   
   state = {
+    userName: '',
     allRooms: [],
     currentUserRoom: {},
     messages: [],
     lockedRooms: [],
+  }
+
+  setUserNameToState = (username) => {
+    this.setState({userName: username})
   }
 
   joinRoomWithUsername = (username, roomname) => {
@@ -73,6 +80,7 @@ class SocketProvider extends Component {
       // const newLockedRoom = [...this.state.lockedRooms, room];
       this.setState({lockedRooms: room})
     })
+    
 
     socket.on('user-message', (data) => {
       const newUserMessage = [...this.state.messages, data]
@@ -97,6 +105,7 @@ class SocketProvider extends Component {
     return (
       <SocketContext.Provider
         value={{
+          userName: this.state.userName,
           allRooms: this.state.allRooms,
           messages: this.state.messages,
           currentUserRoom: this.state.currentUserRoom,
@@ -105,6 +114,7 @@ class SocketProvider extends Component {
           getMessage: this.getMessageFromSocket,
           lockedRooms: this.state.lockedRooms,
           joinLockedRoom: this.joinLockedRoom,
+          handleUserName: this.setUserNameToState
         }}
       >
         {this.props.children}

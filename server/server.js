@@ -34,6 +34,7 @@ io.on('connection', (socket) => {
         socket.emit('message', user) 
         socket.broadcast.to(room).emit('user-joined', `${username} has joined the chat`)
     })
+    
 
     // User wrote message
     socket.on("chat-message", (message) => {
