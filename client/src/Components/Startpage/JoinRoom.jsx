@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { SocketContext } from '../../Contexts/SocketContext'
 import '../../style/RoomList.css'
+
 
 function JoinRoom() {
     const socketContext = useContext(SocketContext)
@@ -12,7 +14,14 @@ function JoinRoom() {
             <ul>
                 {socketContext.allRooms.map(room => (
                     <div key={room.id}>
-                        <h3 key={room.roomname}>{room.roomname}</h3>
+                        <Link to={`/chatRoom?name=Hampus&room=${room.roomname}`}>
+                            <h3 onClick={() => socketContext.joinRoom('Hampus', room.roomname)} key={room.roomname}>{room.roomname}</h3>
+                        </Link>
+                        <ul>
+                            {room.users.map(user => (
+                                <li>{user}</li>
+                            ))}
+                        </ul>
                     </div>
                 ))}
             </ul>

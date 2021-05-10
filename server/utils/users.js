@@ -21,9 +21,14 @@ function getUser(id) {
     }
 }
 
+function getAllUsers() {
+    return users
+}
+
 
 module.exports = {
     userJoin, 
     userLeave,
-    getUser
+    getUser,
+    getAllUsers
 }

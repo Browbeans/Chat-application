@@ -72,7 +72,7 @@ function UserInput() {
           {locked ? (
             <button style={notActive}>Enter password</button>
           ) : ( */}
-             <Link
+          <Link
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
              >

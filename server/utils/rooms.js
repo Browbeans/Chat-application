@@ -1,3 +1,5 @@
+const { getAllUsers } = require('./users')
+
 let rooms = [
 //   (room1 = {
 //     roomname: "stugan",
@@ -20,18 +22,17 @@ function createRoom(id, roomname, username) {
 
     const room = { 
         users: [],
-        id,
-        roomname, 
+        roomname
     }
 
-    room.users.push(username)
+    room.users.push(id)
     const found = rooms.some(theRoom => theRoom.roomname === roomname)
     if(!found) {
         rooms.push(room)
     } else {
         rooms.forEach(specificRoom => {
             if(specificRoom.roomname === roomname) {
-                specificRoom.users.push(username)
+                specificRoom.users.push(id)
             }
         })
     }
@@ -39,19 +40,28 @@ function createRoom(id, roomname, username) {
 }
 
 function allRooms() {
-    return rooms
+    const users = getAllUsers()
+    return rooms.map(room =>( {
+        ...room,
+        users: room.users.map(userId => (
+            users.find(user => userId === user.id).username
+        )) 
+    }))
 }
 
-function removeFromRoom(username) {
-    rooms.map(user => {
-        user.users.splice(user.users.indexOf(username.username, 1))
+function removeFromRoom(user) {
+    rooms.map(room => {
+        const index = room.users.indexOf(user.id)
+        if(index >= 0) {
+            room.users.splice(index, 1)
+        }
     })
-    removeRoom()
+    removeRoom() 
 }
 
 function removeRoom() {
     rooms.forEach(room => {
-         if(room.users.length < 1){
+        if(room.users.length < 1) {
             rooms.splice(rooms.indexOf(room), 1)
         }
     })
