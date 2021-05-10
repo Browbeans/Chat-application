@@ -4,7 +4,7 @@ const http = require('http');
 const { emit } = require('process');
 const socket = require('socket.io');
 const { createRoom, allRooms, removeFromRoom } = require('./utils/rooms')
-const { userJoin, userLeave, getUser } = require('./utils/users')
+const { userJoin, userLeave, getUser, getUserId } = require('./utils/users')
 
 
 const formatMessage = require('./utils/messages')
@@ -58,6 +58,12 @@ io.on('connection', (socket) => {
     socket.on('locked', () => {
         const room = allRooms()
         io.emit('locked-room', room);
+    })
+
+    socket.on('leave-room', () => {
+        const user = getUserId(socket.id)
+        console.log(user);
+        removeFromRoom(user);
     })
 
     // User Disconnect

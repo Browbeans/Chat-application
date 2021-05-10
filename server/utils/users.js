@@ -21,6 +21,14 @@ function getUser(id) {
     }
 }
 
+function getUserId(id) {
+  const index = users.findIndex((user) => user.id === id);
+  if (index !== -1) {
+    return users[index];
+  }
+}
+
+
 function getAllUsers() {
     return users
 }
@@ -30,5 +38,6 @@ module.exports = {
     userJoin, 
     userLeave,
     getUser,
-    getAllUsers
+    getAllUsers,
+    getUserId,
 }

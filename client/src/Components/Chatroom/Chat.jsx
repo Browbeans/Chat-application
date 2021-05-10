@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/ChatStyle.css'
+import { Link } from 'react-router-dom'
 
 
 function Chat() {
@@ -14,8 +15,15 @@ function Chat() {
         socketContext.createMessage(message1)
     }
 
+    const leaveRoom = () => {
+        socketContext.leaveRoom();
+    }
+
     return(
         <div className="chat-container">
+            <Link to="/join-room">
+            <button className="leaveBtn" onClick={leaveRoom} >Leave Room</button>
+            </Link>
             <div className="welcome-div">
              <h2>{userMessage}</h2>
             </div>

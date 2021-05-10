@@ -34,6 +34,24 @@
     margin-bottom: 2rem;
 }
 
+.leaveBtn{
+    background-color: #22EAAA;
+    padding: 1rem 2rem;
+    color: #fff;
+    border-radius: .4rem;
+    outline: none;
+    transition-duration: 0.4s;
+    width: 10rem;
+    font-size: 1.4rem;
+    border: none;
+    font-weight: bold;
+} 
+.leaveBtn:hover{
+    background-color: #fff;
+    padding: 1rem 2rem;
+    color: #22EAAA;
+    border: 3px solid #22EAAA;
+}
 
 .complete-message h3 {
     margin-left: 1rem;
