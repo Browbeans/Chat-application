@@ -22,10 +22,24 @@ io.on('connection', (socket) => {
 
     // User joined specific room
     socket.on("join-room", (username, room) => {
-        createRoom( socket.id, room, username)
+        createRoom( socket.id, room)
         userJoin( socket.id, username, room)
         io.emit('get-rooms', allRooms())
+        console.log(allRooms())
+        const user = {
+            username,  
+            room
+        } 
+        socket.join(room)
+        socket.emit('message', user) 
+        socket.broadcast.to(room).emit('user-joined', `${username} has joined the chat`)
+    })
 
+    socket.on("join-pw-room", (username, room, password) => {
+        createRoom( socket.id, room, password )
+        userJoin( socket.id, username, room)
+        io.emit('get-rooms', allRooms())
+        console.log(allRooms())
         const user = {
             username, 
             room
@@ -53,7 +67,7 @@ io.on('connection', (socket) => {
             console.log(removeFromRoom(user))
             io.to(user.room).emit('user-leave', user)
         }
-    });
+    }); 
     
     // Gets all existing rooms
     io.emit('get-rooms', allRooms())

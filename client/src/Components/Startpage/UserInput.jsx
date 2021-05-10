@@ -35,14 +35,17 @@ function UserInput() {
     setRoomName(e.target.value);
   }
 
-  // const handlePassword = (e) => {
-  //   specificLockedRoomPassword(e);
-  //   setPassword(e.target.value);
-  // }
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     // e.preventDefault();
     socketContext.joinRoom(socketContext.userName, roomname);
+  };
+
+  const handlePWSubmit = () => {
+    socketContext.joinLockedRoom(socketContext.userName, roomname, password);
   };
 
   return (
@@ -74,6 +77,26 @@ function UserInput() {
             <button>JOIN</button>
             </Link>
           {/* )} */}
+
+
+          <input
+          type="text"
+          placeholder="Enter roomname"
+          id="roomname"
+          onChange={e => handleChange(e)}
+          />
+          <input
+          type="text"
+          placeholder="Enter password"
+          id="roomname"
+          onChange={e => handlePassword(e)}
+          />
+          <Link
+          onClick={handlePWSubmit}
+            to={`/chatRoom?name=${username}&room=${roomname}`}
+          >
+            <button>JOIN PW room</button>
+          </Link>
       </div>
     </div>
   );
