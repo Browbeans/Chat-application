@@ -18,11 +18,20 @@ let rooms = [
 //   }),
 ];
 
-function createRoom(id, roomname, username) {
+function createRoom(id, roomname, password) {
+    let room = {}
 
-    const room = { 
-        users: [],
-        roomname
+    if(!password){
+        room = { 
+            users: [],
+            roomname    
+        }
+    } else {
+        room = { 
+            users: [],
+            roomname,
+            password: password
+        }    
     }
 
     room.users.push(id)

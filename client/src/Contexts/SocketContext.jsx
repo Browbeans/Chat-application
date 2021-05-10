@@ -43,8 +43,8 @@ class SocketProvider extends Component {
     socket.emit("join-room", username, roomname);
   }
 
-  joinLockedRoom = () => {
-    socket.emit('locked')
+  joinLockedRoom = (username, roomname, password) => {
+    socket.emit('join-pw-room', username, roomname, password);
   }
 
 
