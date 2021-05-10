@@ -51,6 +51,10 @@ class SocketProvider extends Component {
   }
  
   componentDidMount = () => {
+    socket.on('get-rooms', (rooms) => {
+      this.setState({ allRooms: rooms })
+      console.log(this.state.allRooms)
+    })
 
     socket.on('message', (data) => {
       console.log(data)
@@ -83,10 +87,6 @@ class SocketProvider extends Component {
       this.setState({messages: newUserMessage})
     })
 
-    socket.on('get-rooms', (rooms) => {
-      this.setState({ allRooms: rooms })
-      console.log(this.state.allRooms)
-    })
   };
 
   componentDidUpdate = () => {

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
-
+import '../../style/ChatStyle.css'
 
 
 function Chat() {
@@ -15,32 +15,37 @@ function Chat() {
     }
 
     return(
-        <div style={rootStyle} id="chatDiv">
+        <div className="chat-container">
+            <div className="welcome-div">
              <h2>{userMessage}</h2>
-             <input type="text" placeholder="Enter roomname" id="roomname" onChange={(e) => {
-                setMessage(e.target.value)
-            }}/>
-            <button onClick={createMessage}>Send message</button>
-            <div style={{height: '2rem'}}>
-            
-                {socketContext.messages.map((msg, index) => (
-                    <div key={index}>
-                        <p key={msg.join}>{msg.join}</p>
-                        <p key={msg.name}>{msg.name}</p>
-                        <p key={msg.username}>{msg.username}</p>
-                        <p key={msg.time}>{msg.time}</p>
-                        <p key={msg.text}>{msg.text}</p>
-                    </div>
+            </div>
+            <div className="conversation-div">
+                <div className="message-div">
+                    {socketContext.messages.map((msg, index) => (
+                        <div key={index}>
+                            <p key={msg.join}>{msg.join}</p>
+                            <p key={msg.name}>{msg.name}</p>
+                            <div className="complete-message">
+                                <h3 key={msg.username}>{msg.username}
+                                    <span key={msg.time}>{msg.time}</span>
+                                </h3>
+                                <div className="chat-message">
+                                    <p key={msg.text}>{msg.text}</p>
+
+                                </div>
+                            </div>
+                        </div>
                     ))}
+                </div>
+                <div className="input-div">
+                    <input type="text" placeholder="Write message" id="roomname" onChange={(e) => {
+                        setMessage(e.target.value)
+                    }}/>
+                    <button onClick={createMessage}>Send</button>
+                </div>
             </div>
         </div>
     )
-}
-
-const rootStyle = {
-    height: '40rem', 
-    width: '40rem',
-    background: "#666"
 }
 
 export default Chat

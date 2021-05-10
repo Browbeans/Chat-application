@@ -1,19 +1,36 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { SocketContext } from '../../Contexts/SocketContext'
+import '../../style/RoomList.css'
+
 
 function JoinRoom() {
     const socketContext = useContext(SocketContext)
 
     return (
-        <div>
-            <h1>Current Rooms</h1>
+        <div className="current-rooms">
+            <div className="open-rooms">
+            <h2>Open Rooms</h2>
             <ul>
                 {socketContext.allRooms.map(room => (
                     <div key={room.id}>
-                        <h2 key={room.roomname}>{room.roomname}</h2>
+                        <Link to={`/chatRoom?name=Hampus&room=${room.roomname}`}>
+                            <h3 onClick={() => socketContext.joinRoom('Hampus', room.roomname)} key={room.roomname}>{room.roomname}</h3>
+                        </Link>
+                        <ul>
+                            {room.users.map(user => (
+                                <li>{user}</li>
+                            ))}
+                        </ul>
                     </div>
                 ))}
             </ul>
+            </div>
+            <div className="locked-rooms">
+                <h2>Locked Rooms</h2>
+                <ul>
+                </ul>
+            </div>
         </div>
     )
 }

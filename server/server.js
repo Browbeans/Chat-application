@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 
     socket.on('locked', () => {
         const room = allRooms()
-            io.emit('locked-room', room);
+        io.emit('locked-room', room);
     })
 
     // User Disconnect
