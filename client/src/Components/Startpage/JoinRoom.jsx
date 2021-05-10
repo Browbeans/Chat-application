@@ -14,8 +14,8 @@ function JoinRoom() {
             <ul>
                 {socketContext.allRooms.map(room => (
                     <div key={room.id}>
-                        <Link to={`/chatRoom?name=Hampus&room=${room.roomname}`}>
-                            <h3 onClick={() => socketContext.joinRoom('Hampus', room.roomname)} key={room.roomname}>{room.roomname}</h3>
+                        <Link to={`/chatRoom?name=${socketContext.userName}&room=${room.roomname}`}>
+                            <h3 onClick={() => socketContext.joinRoom(socketContext.userName, room.roomname)} key={room.roomname}>{room.roomname}</h3>
                         </Link>
                         <ul>
                             {room.users.map(user => (

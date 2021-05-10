@@ -42,19 +42,14 @@ function UserInput() {
 
   const handleSubmit = (e) => {
     // e.preventDefault();
-    socketContext.joinRoom(username, roomname);
+    socketContext.joinRoom(socketContext.userName, roomname);
   };
 
   return (
     <div className ="user-container">
-      <h1>Welcome to ChatLine</h1>
+      <h1>Welcome to ChatLine {socketContext.userName}</h1>
       <div className="input-container">
-        <input
-          type="text"
-          placeholder="Your Name"
-          required
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <h4>{socketContext.userName}</h4>
         <input
           type="text"
           placeholder="Enter roomname"
