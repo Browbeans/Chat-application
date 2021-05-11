@@ -13,6 +13,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    justify-content: space-around;
 }
 
 .conversation-div {
@@ -20,6 +21,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.roomInfoH3{
+    color: #fff
+
+}
+
+.userMessage{
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .message-div {
@@ -34,6 +44,24 @@
     margin-bottom: 2rem;
 }
 
+.leaveBtn{
+    background-color: #22EAAA;
+    padding: 1rem 2rem;
+    color: #fff;
+    border-radius: .4rem;
+    outline: none;
+    transition-duration: 0.4s;
+    width: 10rem;
+    font-size: 1.4rem;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+} 
+.leaveBtn:hover{
+    background-color: #fff;
+    color: #22EAAA;
+    border: 3px solid #22EAAA;
+}
 
 .complete-message h3 {
     margin-left: 1rem;
@@ -60,21 +88,31 @@ span {
     justify-content: space-between;
 }
 
-.input-div input {
+.inputMessage {
     width: 85%;
     height: 6rem;
     border-radius: 1rem;
-    padding: 0 1rem;
-    font-size: 1.5rem;
+    border: 2px solid #22EAAA;
+    padding: .5rem 1rem;
+    font-size: 1.4rem;
     outline: none;
+    margin: 0rem .5rem;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
 }
 
-.input-div button {
-    height: 6rem;
+.sendBtn {
+    padding: 1rem;
     border-radius: 1rem;
-    width: 14%;
     background: #22EAAA;
     color: white;
-    font-size: 2.5rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    transition-duration: 0.4s;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+}
+.sendBtn:hover{
+    background-color: #fff;
+    color: #22EAAA;
 }

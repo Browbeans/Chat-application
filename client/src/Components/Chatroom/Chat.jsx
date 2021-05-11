@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/ChatStyle.css'
+import { Link } from 'react-router-dom'
 
 
 function Chat() {
@@ -13,12 +14,21 @@ function Chat() {
     const createMessage = () => {
         socketContext.createMessage(message1)
     }
+      const leaveRoom = () => {
+        socketContext.leaveRoom();
+    }
 
     return(
         <div className="chat-container">
-            <div className="welcome-div">
-             <h2>{userMessage}</h2>
-            </div>
+             <div className="welcome-div">
+          <h3 className="roomInfoH3">RoomInfo</h3>
+          <h2 className="usserMessage">{userMessage}</h2>
+          <Link to="/join-room">
+            <button className="leaveBtn" onClick={leaveRoom}>
+              Leave Room
+            </button>
+          </Link>
+        </div>
             <div className="conversation-div">
                 <div className="message-div">
                     {socketContext.messages.map((msg, index) => (
@@ -46,10 +56,26 @@ function Chat() {
                         setMessage(e.target.value)
                     }}/>
                     <button onClick={createMessage}>Send</button>
+
                 </div>
-            </div>
+              </div>
+            ))}
+          </div>
+          <div className="input-div">
+            <input
+            className="inputMessage"
+              type="text"
+              placeholder="Write message"
+              id="roomname"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            />
+            <button className="sendBtn" onClick={createMessage}>Send</button>
+          </div>
         </div>
-    )
+      </div>
+    );
 }
 
 export default Chat
