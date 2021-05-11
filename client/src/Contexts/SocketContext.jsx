@@ -99,7 +99,7 @@ class SocketProvider extends Component {
 
     socket.on('user-leave', (data) => {
       const userJoined = {
-        name: data.username
+        name: `${data.username} has left the chat`
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})

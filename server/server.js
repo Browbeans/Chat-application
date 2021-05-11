@@ -10,7 +10,7 @@ const { userJoin, userLeave, getUser, getUserId } = require('./utils/users')
 const formatMessage = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
 
-const app = express();
+const app = express(); 
 const server = http.createServer(app);
 const io = socket(server);
 

@@ -8,15 +8,24 @@
     height: 40vh;
 }
 
+
+.inputs {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .welcomeText{
     color: #fff;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
+
 span {
     color: #22EAAA;
     font-size: 2rem;
     font-family: 'Rock Salt', cursive;
 }
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -37,7 +46,10 @@ span {
 }
 
 .input-container input {
-    width: 15rem;
+
+    width: 70%;
+    padding: .7rem;
+
     border-radius: 1rem;
     margin-bottom: 1rem;
     outline: none;
@@ -50,11 +62,16 @@ span {
     border: none;
     margin-bottom: 4rem;
     padding: .5rem;
-    width: 15rem;
+
+    width: 70%;
+
     border-radius: 1rem;
     outline: none;
     background: #22EAAA;
     color: white;
+
+    
+    margin: 1rem;
     font-size: 1.4rem;
     font-weight: bold;
     transition-duration: 0.4s;

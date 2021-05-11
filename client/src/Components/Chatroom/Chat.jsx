@@ -14,14 +14,13 @@ function Chat() {
     const createMessage = () => {
         socketContext.createMessage(message1)
     }
-
-    const leaveRoom = () => {
+      const leaveRoom = () => {
         socketContext.leaveRoom();
     }
 
-    return (
-      <div className="chat-container">
-        <div className="welcome-div">
+    return(
+        <div className="chat-container">
+             <div className="welcome-div">
           <h3 className="roomInfoH3">RoomInfo</h3>
           <h2 className="usserMessage">{userMessage}</h2>
           <Link to="/join-room">
@@ -30,20 +29,34 @@ function Chat() {
             </button>
           </Link>
         </div>
-        <div className="conversation-div">
-          <div className="message-div">
-            {socketContext.messages.map((msg, index) => (
-              <div key={index}>
-                <p key={msg.join}>{msg.join}</p>
-                <p key={msg.name}>{msg.name}</p>
-                <div className="complete-message">
-                  <h3 key={msg.username}>
-                    {msg.username}
-                    <span key={msg.time}>{msg.time}</span>
-                  </h3>
-                  <div className="chat-message">
-                    <p key={msg.text}>{msg.text}</p>
-                  </div>
+            <div className="conversation-div">
+                <div className="message-div">
+                    {socketContext.messages.map((msg, index) => (
+                        <div key={index}>
+                            <p key={msg.join}>{msg.join}</p>
+                            <p key={msg.name}>{msg.name}</p>
+                            {msg.text 
+                            ?
+                            <div className="complete-message">
+                                <h3 key={msg.username}>{msg.username}
+                                    <span key={msg.time}>{msg.time}</span>
+                                </h3>
+                                <div className="chat-message">
+                                    <p key={msg.text}>{msg.text}</p>
+                                </div>
+                            </div>
+                            :
+                            <></>
+                            }
+                        </div>
+                    ))}
+                </div>
+                <div className="input-div">
+                    <input type="text" placeholder="Write message" id="roomname" onChange={(e) => {
+                        setMessage(e.target.value)
+                    }}/>
+                    <button onClick={createMessage}>Send</button>
+
                 </div>
               </div>
             ))}
