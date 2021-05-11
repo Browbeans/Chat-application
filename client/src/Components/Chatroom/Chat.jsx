@@ -25,15 +25,19 @@ function Chat() {
                         <div key={index}>
                             <p key={msg.join}>{msg.join}</p>
                             <p key={msg.name}>{msg.name}</p>
+                            {msg.text 
+                            ?
                             <div className="complete-message">
                                 <h3 key={msg.username}>{msg.username}
                                     <span key={msg.time}>{msg.time}</span>
                                 </h3>
                                 <div className="chat-message">
                                     <p key={msg.text}>{msg.text}</p>
-
                                 </div>
                             </div>
+                            :
+                            <></>
+                            }
                         </div>
                     ))}
                 </div>

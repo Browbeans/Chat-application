@@ -8,6 +8,12 @@
     height: 40vh;
 }
 
+.inputs {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -16,7 +22,7 @@
 }
 
 .input-container input {
-    width: 15rem;
+    width: 70%;
     padding: .7rem;
     border-radius: 1rem;
     margin: 1rem;
@@ -25,11 +31,12 @@
 
 .input-container button {
     padding: .5rem;
-    width: 16.4rem;
+    width: 70%;
     border-radius: 1rem;
     outline: none;
     background: #22EAAA;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    margin: 1rem;
 }
