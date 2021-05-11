@@ -4,7 +4,7 @@ import StartPage from "./StartPage";
 import ChatRoom from "./Chatroom/ChatRoom";
 import UserInput from './Startpage/UserInput'
 import JoinRoom from './Startpage/JoinRoom'
-import '../style/StartPage.css'
+import '../style/JoinRoom.css'
 
 function Layout() {
     return (
@@ -17,7 +17,7 @@ function Layout() {
                     <ChatRoom/>
                 </Route>
                 <Route path="/join-room">
-                    <div className="start-container">
+                    <div className="wrapper">
                     <JoinRoom/>
                     <UserInput/>
                     </div>
