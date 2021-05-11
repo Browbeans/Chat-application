@@ -73,6 +73,16 @@ io.on('connection', (socket) => {
         io.to(user.room).emit("user-leave", user);
         io.emit("get-rooms", allRooms());
     })
+
+    // Is User Typing
+    socket.on("typing", (userObj) => {
+        if (userObj.name) {
+            socket.broadcast.to(userObj.room).emit('display-typing', "")
+        } else {
+            socket.broadcast.to(userObj.room).emit('display-typing', `${userObj.username} is typing...`)
+        }
+
+    }); 
  
     // User Disconnect
     socket.on("disconnect", () => {

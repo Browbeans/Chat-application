@@ -17,12 +17,14 @@ export const SocketContext = createContext({
   currentUserRoom: {},
   messages: [],
   lockedRooms: [],
+  isTyping: "",
   joinRoom: (username, roomname) => {},
   createMessage: (message) => {},
   getMessage: () => {},
   leaveRoom: () => {},
   joinLockedRoom: () => {},
-  handleUserName: () => {}
+  handleUserName: () => {},
+  isTypingTrue: () => {}
 });
 
 class SocketProvider extends Component {
@@ -33,7 +35,12 @@ class SocketProvider extends Component {
     currentUserRoom: {},
     messages: [],
     lockedRooms: [],
+    isTyping: ""
   }
+
+  setIsTypingTrue = (userObj) => {
+    socket.emit("typing", userObj);
+  };
 
   setUserNameToState = (username) => {
     this.setState({userName: username})
@@ -58,10 +65,15 @@ class SocketProvider extends Component {
       name: this.state.currentUserRoom.username,
       room: this.state.currentUserRoom.room
     }
+    socket.emit("typing", userObject);
     socket.emit('chat-message', (userObject))
   }
  
   componentDidMount = () => {
+
+    socket.on("display-typing", (user) => {
+      this.setState({ isTyping: user })
+    })
 
     socket.on("current-room", (data) => {
       const updatedUsers = data;
@@ -118,14 +130,16 @@ class SocketProvider extends Component {
           userName: this.state.userName,
           allRooms: this.state.allRooms,
           messages: this.state.messages,
-          leaveRoom: this.leaveRoom,
           currentUserRoom: this.state.currentUserRoom,
-          joinRoom: this.joinRoomWithUsername,
-          createMessage: this.createMessageToSocket,
           getMessage: this.getMessageFromSocket,
           lockedRooms: this.state.lockedRooms,
+          isTyping: this.state.isTyping,
+          leaveRoom: this.leaveRoom,
+          joinRoom: this.joinRoomWithUsername,
+          createMessage: this.createMessageToSocket,
           joinLockedRoom: this.joinLockedRoom,
-          handleUserName: this.setUserNameToState
+          handleUserName: this.setUserNameToState,
+          isTypingTrue: this.setIsTypingTrue
         }}
       >
         {this.props.children}
