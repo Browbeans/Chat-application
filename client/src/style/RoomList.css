@@ -6,8 +6,21 @@
     padding: 1rem;
 }
 
+.room-info-container {
+    margin-bottom: 5rem;
+}
+
 .current-rooms ul {
    padding: 0; 
+}
+
+.title {
+    margin: 1rem
+}
+
+.sub-title {
+    color: #fff;
+    font-weight: normal;
 }
 
 @media screen and (max-width: 630px) {
