@@ -65,7 +65,8 @@ function removeFromRoom(user) {
             room.users.splice(index, 1)
         }
     })
-    removeRoom() 
+    removeRoom()
+    return rooms; 
 }
 
 function removeRoom() {

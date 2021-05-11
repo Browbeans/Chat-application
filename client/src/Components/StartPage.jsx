@@ -4,7 +4,7 @@ import UserInput from "./Startpage/UserInput";
 import JoinRoom from "./Startpage/JoinRoom";
 import '../style/StartPage.css'
 import { SocketContext } from "../Contexts/SocketContext";
-import '../style/UserInput.css'
+
 
 function StartPage() {
     const socketContext = useContext(SocketContext);
@@ -16,24 +16,24 @@ function StartPage() {
     };
 
     return (
-        <div className="start-container">
-            <h1>Welcome to ChatLine</h1>
-            <div className="input-container">
-                <input
-                type="text"
-                placeholder="Your Name"
-                required
-                onChange={(e) => setUsername(e.target.value)}
-                />
-                <Link
-                    onClick={handleSubmit}
-                    to="/join-room"
-                    >
-                    <button>Set username</button>
-                </Link>
-            </div>
+      <div className="start-container">
+        <h1 className="welcomeText">
+          Welcome to<span>ChatLine</span>
+        </h1>
+        <div className="input-container">
+          <input
+            className="nameInput"
+            type="text"
+            placeholder="Your Name"
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Link onClick={handleSubmit} to="/join-room">
+            <button className="addUserNameBtn">Add username</button>
+          </Link>
         </div>
-    )
+      </div>
+    );
 }
 
 export default StartPage
