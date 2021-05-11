@@ -7,17 +7,22 @@ import { Link } from 'react-router-dom'
 function Chat() {
     const socketContext = useContext(SocketContext)
     const currentUserInfo = socketContext.currentUserRoom
+    const isTyping = socketContext.isTyping
     const userMessage = `Welcome ${currentUserInfo.username} to ${currentUserInfo.room}`
 
-
-    
-    const [message1, setMessage] = useState('')
+    const [message1, setMessage] = useState('');
+    const [typing, setTyping] = useState("")
 
     const createMessage = () => {
-        socketContext.createMessage(message1)
+        socketContext.createMessage(message1);
     }
       const leaveRoom = () => {
         socketContext.leaveRoom();
+    }
+
+    const handleTyping = (e) => {
+        setMessage(e.target.value);
+        socketContext.isTypingTrue(currentUserInfo);
     }
 
     const messageEndRef = useRef(null)
@@ -27,7 +32,8 @@ function Chat() {
     }
 
     useEffect(() => {
-        scrollToBottom()
+        scrollToBottom();
+        setTyping(isTyping);
     })
 
     return(
@@ -77,20 +83,17 @@ function Chat() {
                     ))}
                 </div>
             </div>
-
+            <p>{typing}</p>
             <div className="input-div">
                 <input
                     className="inputMessage"
                     type="text"
                     placeholder="Write message"
                     id="roomname"
-                    onChange={(e) => {
-                    setMessage(e.target.value);
-                }}
+                    onChange={(e) => {handleTyping(e)}}
                 />
                 <button className="sendBtn" onClick={createMessage}>Send</button>
             </div>
-
         </div>
     );
 }
