@@ -62,15 +62,18 @@ io.on('connection', (socket) => {
 
     socket.on('leave-room', () => {
         const user = getUserId(socket.id)
-        console.log(user);
+        // console.log(user);
         removeFromRoom(user);
+        io.to(user.room).emit("user-leave", user);
+        io.emit("get-rooms", allRooms());
     })
 
     // User Disconnect
     socket.on("disconnect", () => {
+
         const user = userLeave(socket.id)
+        console.log(user);
         if(user) {
-            console.log(removeFromRoom(user))
             io.to(user.room).emit('user-leave', user)
         }
     }); 
