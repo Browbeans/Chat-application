@@ -76,8 +76,14 @@ function removeRoom() {
     })
 }
 
+function getRoom(roomname) {
+    const users = getAllUsers()
+    return users.filter((user) => user.room === roomname)
+}
+
 module.exports = {
     createRoom, 
     allRooms,
-    removeFromRoom
+    removeFromRoom,
+    getRoom
 }
