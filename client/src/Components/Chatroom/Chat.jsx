@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/ChatStyle.css'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,16 @@ function Chat() {
         socketContext.leaveRoom();
     }
 
+    const messageEndRef = useRef(null)
+    
+    const scrollToBottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    })
+
     return(
         <div className="chat-container">
 
@@ -31,9 +41,7 @@ function Chat() {
             </div>
 
             <div className="conversation-div">
-
                 <div className="message-div">
-
                     {socketContext.messages.map((msg, index) => (
                         
                         <div key={index}>
@@ -43,13 +51,14 @@ function Chat() {
                             {msg.text
                             ?
                             <div className="complete-message">
-                                <h3 key={msg.username}>{msg.username}
-                                    <span key={msg.time}>{msg.time}</span>
+                                <h3 class="name-h3" key={msg.username}>{msg.username}
+                                    <span class="time-span" key={msg.time}>{msg.time}</span>
                                 </h3>
 
                                 <div className="chat-message">
                                     <p key={msg.text}>{msg.text}</p>
                                 </div>
+                                <div ref={messageEndRef}></div>
                             </div>
                             :
                             <></>    
