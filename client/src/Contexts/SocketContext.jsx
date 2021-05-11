@@ -41,6 +41,7 @@ class SocketProvider extends Component {
 
   joinRoomWithUsername = (username, roomname) => {
     socket.emit("join-room", username, roomname);
+    socket.emit("current-room", username, roomname);
   }
 
   joinLockedRoom = (username, roomname, password) => {
@@ -61,6 +62,12 @@ class SocketProvider extends Component {
   }
  
   componentDidMount = () => {
+
+    socket.on("current-room", (data) => {
+      const updatedUsers = data;
+      this.setState({ allRooms: updatedUsers });
+    });
+
     socket.on('get-rooms', (rooms) => {
       this.setState({ allRooms: rooms })
       console.log(this.state.allRooms)
@@ -108,6 +115,7 @@ class SocketProvider extends Component {
     return (
       <SocketContext.Provider
         value={{
+          users: this.state.users,
           userName: this.state.userName,
           allRooms: this.state.allRooms,
           messages: this.state.messages,
