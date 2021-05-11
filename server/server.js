@@ -73,13 +73,12 @@ io.on('connection', (socket) => {
         io.to(user.room).emit("user-leave", user);
         io.emit("get-rooms", allRooms());
     })
-
+ 
     // User Disconnect
     socket.on("disconnect", () => {
-
         const user = userLeave(socket.id)
-        console.log(user);
         if(user) {
+            removeFromRoom(user)
             io.to(user.room).emit('user-leave', user)
         }
         io.emit("current-room", allRooms());

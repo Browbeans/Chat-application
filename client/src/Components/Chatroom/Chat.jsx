@@ -22,11 +22,10 @@ function Chat() {
         <div className="chat-container">
 
             <div className="welcome-div">
-                <h3 className="roomInfoH3">RoomInfo</h3>
                 <h2 className="usserMessage">{userMessage}</h2>
                 <Link to="/join-room">
                     <button className="leaveBtn" onClick={leaveRoom}>
-                    Leave Room
+                        Leave Room
                     </button>
                 </Link>
             </div>
