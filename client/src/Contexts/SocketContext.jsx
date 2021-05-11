@@ -47,6 +47,9 @@ class SocketProvider extends Component {
     socket.emit('join-pw-room', username, roomname, password);
   }
 
+  leaveRoom = () => {
+    socket.emit('leave-room');
+  }
 
   createMessageToSocket = (message) => {
     const userObject = {
@@ -108,6 +111,7 @@ class SocketProvider extends Component {
           userName: this.state.userName,
           allRooms: this.state.allRooms,
           messages: this.state.messages,
+          leaveRoom: this.leaveRoom,
           currentUserRoom: this.state.currentUserRoom,
           joinRoom: this.joinRoomWithUsername,
           createMessage: this.createMessageToSocket,
