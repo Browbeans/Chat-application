@@ -86,7 +86,6 @@ io.on('connection', (socket) => {
     
     // Gets all existing rooms
     io.emit('get-rooms', allRooms());
-    
    
 })
 

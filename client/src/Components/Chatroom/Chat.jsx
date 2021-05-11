@@ -8,6 +8,8 @@ function Chat() {
     const socketContext = useContext(SocketContext)
     const currentUserInfo = socketContext.currentUserRoom
     const userMessage = `Welcome ${currentUserInfo.username} to ${currentUserInfo.room}`
+
+
     
     const [message1, setMessage] = useState('')
 
@@ -43,27 +45,34 @@ function Chat() {
             <div className="conversation-div">
                 <div className="message-div">
                     {socketContext.messages.map((msg, index) => (
-                        
-                        <div key={index}>
-                            <p key={msg.join}>{msg.join}</p>
-                            <p key={msg.name}>{msg.name}</p>
-                            <div>
-                            {msg.text
+                        <div>
+                            {msg.room === currentUserInfo.room
                             ?
-                            <div className="complete-message">
-                                <h3 class="name-h3" key={msg.username}>{msg.username}
-                                    <span class="time-span" key={msg.time}>{msg.time}</span>
-                                </h3>
+                            <div key={index}>
+                                <p key={msg.join}>{msg.join}</p>
+                                <p key={msg.name}>{msg.name}</p>
+                                <div>
+                                    {msg.text
+                                    ?
+                                    <div className="complete-message">
+                                        <h3 class="name-h3" key={msg.username}>{msg.username}
+                                            <span class="time-span" key={msg.time}>{msg.time}</span>
+                                        </h3>
 
-                                <div className="chat-message">
-                                    <p key={msg.text}>{msg.text}</p>
+                                        <div className="chat-message">
+                                            <p key={msg.text}>{msg.text}</p>
+                                        </div>
+                                        <div ref={messageEndRef}></div>
                                 </div>
-                                <div ref={messageEndRef}></div>
-                            </div>
                             :
                             <></>    
                             }
                             </div>
+                            </div>
+                            :
+                            <></>
+                            }
+                            
                         </div>
                     ))}
                 </div>

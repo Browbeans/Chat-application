@@ -1,4 +1,6 @@
+const { io } = require('socket.io-client');
 const { getAllUsers } = require('./users')
+const { clearMessage } = require('../server')
 
 let rooms = [
 //   (room1 = {
@@ -73,6 +75,7 @@ function removeRoom() {
     rooms.forEach(room => {
         if(room.users.length < 1) {
             rooms.splice(rooms.indexOf(room), 1)
+            clearMessage
         }
     })
 }

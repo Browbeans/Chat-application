@@ -74,7 +74,6 @@ class SocketProvider extends Component {
     })
 
     socket.on('message', (data) => {
-      console.log(data)
       this.setState({currentUserRoom: data})
     })
 
@@ -93,6 +92,7 @@ class SocketProvider extends Component {
     
 
     socket.on('user-message', (data) => {
+      console.log(data)
       const newUserMessage = [...this.state.messages, data]
       this.setState({messages: newUserMessage})
     })
@@ -104,7 +104,6 @@ class SocketProvider extends Component {
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
     })
-
   };
 
   componentDidUpdate = () => {
