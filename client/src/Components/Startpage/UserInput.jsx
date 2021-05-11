@@ -49,15 +49,18 @@ function UserInput() {
   };
 
   return (
-    <div className ="user-container">
-      <h1>Welcome to ChatLine {socketContext.userName}</h1>
+    <div className="user-container">
+      <h1 className="welcomeText">
+        Welcome to <span>ChatLine</span> {socketContext.userName}
+      </h1>
       <div className="input-container">
-        <h4>{socketContext.userName}</h4>
+        <h4 className="user">{socketContext.userName}</h4>
+        <h3 className="JoinRoomText">Join or create a locked Room</h3>
         <input
           type="text"
           placeholder="Enter roomname"
           id="roomname"
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
         />
         {/* {locked ? (
           <input
@@ -70,33 +73,33 @@ function UserInput() {
           {locked ? (
             <button style={notActive}>Enter password</button>
           ) : ( */}
-          <Link
+        <Link
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
-             >
-            <button>JOIN</button>
-            </Link>
-          {/* )} */}
+        >
+          <button>JOIN</button>
+        </Link>
+        {/* )} */}
 
-
-          <input
+        <h3 className="JoinRoomText">Join or create a locked Room</h3>
+        <input
           type="text"
           placeholder="Enter roomname"
           id="roomname"
-          onChange={e => handleChange(e)}
-          />
-          <input
+          onChange={(e) => handleChange(e)}
+        />
+        <input
           type="text"
           placeholder="Enter password"
           id="roomname"
-          onChange={e => handlePassword(e)}
-          />
-          <Link
+          onChange={(e) => handlePassword(e)}
+        />
+        <Link
           onClick={handlePWSubmit}
-            to={`/chatRoom?name=${username}&room=${roomname}`}
-          >
-            <button>JOIN PW room</button>
-          </Link>
+          to={`/chatRoom?name=${username}&room=${roomname}`}
+        >
+          <button>JOIN</button>
+        </Link>
       </div>
     </div>
   );

@@ -1,8 +1,49 @@
 .start-container {
     display: flex;
+    flex-direction: column;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-
 .open-rooms {
     margin: 0 0 3rem 0;
+}
+
+.welcomeText{
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+span {
+    color: #22EAAA;
+    font-size: 2rem;
+    font-family: 'Rock Salt', cursive;
+}
+.nameInput{
+    width: 22rem;
+    border: 2px solid #22EAAA;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+}
+.addUserNameBtn{
+    width: 20rem;
+    background: #22EAAA;
+    border: none;
+    padding: 2rem 2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    outline: none;
+    transition-duration: 0.4s;
+}
+.addUserNameBtn:hover{
+    background-color: #fff;
+    color: #22EAAA;
+}
+
+@media screen and (max-width: 630px) {
+
+    .welcomeText{
+        display: flex;
+        flex-direction: column;
+    }
 }
