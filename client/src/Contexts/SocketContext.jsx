@@ -47,7 +47,7 @@ class SocketProvider extends Component {
   }
 
   joinRoomWithUsername = (username, roomname) => {
-    socket.emit("join-room", username, roomname);
+    socket.emit("join-room", username, roomname, `${username} has joined the chat`);
     socket.emit("current-room", username, roomname);
   }
 
@@ -82,7 +82,6 @@ class SocketProvider extends Component {
 
     socket.on('get-rooms', (rooms) => {
       this.setState({ allRooms: rooms })
-      console.log(this.state.allRooms)
     })
 
     socket.on('message', (data) => {
@@ -91,36 +90,35 @@ class SocketProvider extends Component {
 
     socket.on('user-joined', (response) => {
       const userJoined = {
-        join: response
+        text: response.text, 
+        room: response.room, 
+        name: response.username
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
     })
 
     socket.on('locked-room', (room) => {
-      // const newLockedRoom = [...this.state.lockedRooms, room];
       this.setState({lockedRooms: room})
     })
     
 
     socket.on('user-message', (data) => {
-      console.log(data)
       const newUserMessage = [...this.state.messages, data]
       this.setState({messages: newUserMessage})
     })
 
-    socket.on('user-leave', (data) => {
+    socket.on('user-leave', (response) => {
       const userJoined = {
-        name: `${data.username} has left the chat`
+        text: response.text, 
+        room: response.room, 
+        name: response.username
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
     })
   };
 
-  componentDidUpdate = () => {
-
-  };
 
   render() {
     return (

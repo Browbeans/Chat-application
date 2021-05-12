@@ -20,34 +20,42 @@ io.on('connection', (socket) => {
 
 
     // User joined specific room
-    socket.on("join-room", (username, room) => {
+    socket.on("join-room", (username, room, text) => {
         createRoom( socket.id, room)
         userJoin( socket.id, username, room)
         io.emit('get-rooms', allRooms())
-        // console.log(allRooms())
         const user = {
             username,  
             room
         } 
+        const message = {
+            name: username, 
+            text: `${username} has joined the chat`, 
+            room: room
+        }
 
         socket.join(room)
         socket.emit('message', user) 
-        socket.broadcast.to(room).emit('user-joined', `${username} has joined the chat`)
+        socket.broadcast.to(room).emit('user-joined', formatMessage(message))
     })
 
     socket.on("join-pw-room", (username, room, password) => {
         createRoom( socket.id, room, password )
         userJoin( socket.id, username, room)
         io.emit('get-rooms', allRooms())
-        console.log(allRooms())
         const user = {
             username, 
             room
         }
+        const message = {
+            name: username, 
+            text: `${username} has joined the chat`, 
+            room: room
+        }
 
         socket.join(room)
         socket.emit('message', user) 
-        socket.broadcast.to(room).emit('user-joined', `${username} has joined the chat`)
+        socket.broadcast.to(room).emit('user-joined', formatMessage(message))
     })
     
 
@@ -68,9 +76,13 @@ io.on('connection', (socket) => {
 
     socket.on('leave-room', () => {
         const user = getUserId(socket.id)
-        // console.log(user);
+        const message = {
+            name: user.username, 
+            text: `${user.username} has left the chat`, 
+            room: user.room
+        }
         removeFromRoom(user);
-        io.to(user.room).emit("user-leave", user);
+        io.to(user.room).emit("user-leave", formatMessage(message));
         io.emit("get-rooms", allRooms());
     })
 
