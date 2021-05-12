@@ -1,24 +1,7 @@
 const { io } = require('socket.io-client');
 const { getAllUsers } = require('./users')
-const { clearMessage } = require('../server')
 
-let rooms = [
-//   (room1 = {
-//     roomname: "stugan",
-//     locked: true,
-//     password: "1234",
-//   }),
-//   (room2 = {
-//     roomname: "bärsrummet",
-//     locked: true,
-//     password: "1111",
-//   }),
-//   (room3 = {
-//     roomname: "katedralen",
-//     locked: true,
-//     password: "4444",
-//   }),
-];
+let rooms = [];
 
 function createRoom(id, roomname, password) {
     let room = {}
@@ -68,14 +51,12 @@ function removeFromRoom(user) {
         }
     })
     removeRoom()
-    return rooms; 
 }
 
 function removeRoom() {
     rooms.forEach(room => {
         if(room.users.length < 1) {
             rooms.splice(rooms.indexOf(room), 1)
-            clearMessage
         }
     })
 }

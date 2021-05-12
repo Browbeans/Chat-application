@@ -47,7 +47,7 @@ class SocketProvider extends Component {
   }
 
   joinRoomWithUsername = (username, roomname) => {
-    socket.emit("join-room", username, roomname);
+    socket.emit("join-room", username, roomname, `${username} has joined the chat`);
     socket.emit("current-room", username, roomname);
   }
 
@@ -90,8 +90,11 @@ class SocketProvider extends Component {
     })
 
     socket.on('user-joined', (response) => {
+      console.log(response)
       const userJoined = {
-        join: response
+        text: response.text, 
+        room: response.room, 
+        name: response.username
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
@@ -109,9 +112,11 @@ class SocketProvider extends Component {
       this.setState({messages: newUserMessage})
     })
 
-    socket.on('user-leave', (data) => {
+    socket.on('user-leave', (response) => {
       const userJoined = {
-        name: `${data.username} has left the chat`
+        text: response.text, 
+        room: response.room, 
+        name: response.username
       }
       const newUserMessage = [...this.state.messages, userJoined]
       this.setState({messages: newUserMessage})
