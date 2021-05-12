@@ -1,4 +1,3 @@
-const { io } = require('socket.io-client');
 const { getAllUsers } = require('./users')
 
 let rooms = [];

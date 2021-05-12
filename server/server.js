@@ -24,7 +24,6 @@ io.on('connection', (socket) => {
         createRoom( socket.id, room)
         userJoin( socket.id, username, room)
         io.emit('get-rooms', allRooms())
-        // console.log(allRooms())
         const user = {
             username,  
             room
@@ -44,7 +43,6 @@ io.on('connection', (socket) => {
         createRoom( socket.id, room, password )
         userJoin( socket.id, username, room)
         io.emit('get-rooms', allRooms())
-        console.log(allRooms())
         const user = {
             username, 
             room

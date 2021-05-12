@@ -71,8 +71,6 @@ function Chat() {
                             {msg.room === currentUserInfo.room
                             ?
                             <div key={index}>
-                                {/* <p key={msg.join}>{msg.text}</p>
-                                <p key={msg.name}>{msg.name}</p> */}
                                 <div>
                                     {msg.text
                                     ?
