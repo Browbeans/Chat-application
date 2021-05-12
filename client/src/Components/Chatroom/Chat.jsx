@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/ChatStyle.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 function Chat() {
@@ -12,6 +13,7 @@ function Chat() {
 
     const [message1, setMessage] = useState('');
     const [typing, setTyping] = useState("")
+    const [isApi, setApi] = useState(false)
 
     const createMessage = (e) => {
         e.preventDefault();
@@ -25,6 +27,18 @@ function Chat() {
     const handleTyping = (e) => {
         setMessage(e.target.value);
         socketContext.isTypingTrue(currentUserInfo);
+        if(e.target.value === '/') {
+            setApi(true)
+        } else {
+            setApi(false)
+        }
+    }
+
+    const getChuckApi = () => {
+        axios.get('https://api.chucknorris.io/jokes/random')
+        .then(function(response){
+            socketContext.createMessage(response.data.value);
+        })
     }
 
     const messageEndRef = useRef(null)
@@ -94,6 +108,15 @@ function Chat() {
                     id="roomname"
                     onChange={(e) => {handleTyping(e)}}
                 />
+                {isApi 
+                ? 
+                <ul style={{position: 'fixed', top: '70%'}}>
+                    <li onClick={getChuckApi}>CHUCK NORRIS</li>
+                    {/* <li onClick={getApi}>API</li> */}
+                </ul>
+                : 
+                <></>
+                }
                 <input type="submit" className="sendBtn" value="Send"/>
             </form>
         </div>
