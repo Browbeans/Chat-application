@@ -18,7 +18,7 @@ function StartPage() {
     return (
       <div className="start-container">
         <h1 className="welcomeText">
-          Welcome to<span>ChatLine</span>
+          Welcome to <span>ChatLine</span>
         </h1>
         <div className="input-container">
           <input

@@ -73,7 +73,7 @@ function UserInput() {
   return (
     <div className="user-container">
       <h1 className="welcomeText">
-        Welcome to <span>ChatLine</span> {socketContext.userName}
+        Welcome to <span>ChatLine</span>
       </h1>
       <div className="input-container">
         <div className="inputs">
@@ -104,7 +104,7 @@ function UserInput() {
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
              >
-            <button style={{display: 'flex', justifyContent:'center'}}>Create and join... <LockOpenTwoToneIcon/></button>
+            <button>Create and join... <LockOpenTwoToneIcon/></button>
             </Link>
           {/* )} */}
           <div>
@@ -144,7 +144,7 @@ function UserInput() {
               onClick={handlePWSubmit}
                 to={`/chatRoom?name=${username}&room=${roomname}`}
               >
-                <button style={{display: 'flex', justifyContent:'center'}}>
+                <button>
                   Create and join... <HttpsTwoToneIcon/>
                 </button>
               </Link>

@@ -13,8 +13,10 @@ function Chat() {
     const [message1, setMessage] = useState('');
     const [typing, setTyping] = useState("")
 
-    const createMessage = () => {
+    const createMessage = (e) => {
+        e.preventDefault();
         socketContext.createMessage(message1);
+        e.target.reset();
     }
       const leaveRoom = () => {
         socketContext.leaveRoom();
@@ -84,7 +86,7 @@ function Chat() {
                 </div>
             </div>
             <p>{typing}</p>
-            <div className="input-div">
+            <form className="input-div" onSubmit={(e) => createMessage(e)}>
                 <input
                     className="inputMessage"
                     type="text"
@@ -92,8 +94,8 @@ function Chat() {
                     id="roomname"
                     onChange={(e) => {handleTyping(e)}}
                 />
-                <button className="sendBtn" onClick={createMessage}>Send</button>
-            </div>
+                <input type="submit" className="sendBtn" value="Send"/>
+            </form>
         </div>
     );
 }
