@@ -75,11 +75,11 @@ function UserInput() {
       <h1 className="welcomeText">
         Welcome to <span>ChatLine</span>
       </h1>
-      <div className="input-container">
+      <div className="input-container" style={{ flexDirection: "column" }}>
         <div className="inputs">
 
         <h4 className="user">{socketContext.userName}</h4>
-        <h3 className="JoinRoomText">Join or create a locked Room</h3>
+        <h3 className="JoinRoomText">Create a public room</h3>
 
         <input
           type="text"
@@ -104,11 +104,11 @@ function UserInput() {
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
              >
-            <button>Create and join... <LockOpenTwoToneIcon/></button>
+            <button>Join</button>
             </Link>
           {/* )} */}
           <div>
-          <h3 className="JoinRoomText">Join or create a locked Room</h3>
+          <h3 className="JoinRoomText">Create a locked room</h3>
           <input
               type="text"
               placeholder="Enter roomname"
@@ -145,7 +145,7 @@ function UserInput() {
                 to={`/chatRoom?name=${username}&room=${roomname}`}
               >
                 <button>
-                  Create and join... <HttpsTwoToneIcon/>
+                  Join <HttpsTwoToneIcon/>
                 </button>
               </Link>
             </div>
