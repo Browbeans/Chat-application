@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/ChatStyle.css'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 
@@ -21,9 +20,7 @@ function Chat() {
         socketContext.createMessage(message1);
         e.target.reset();
     }
-      const leaveRoom = () => {
-        socketContext.leaveRoom();
-    }
+      
 
     const handleTyping = (e) => {
         setMessage(e.target.value);
@@ -65,11 +62,6 @@ function Chat() {
 
             <div className="welcome-div">
                 <h2 className="usserMessage">{userMessage}</h2>
-                <Link to="/join-room">
-                    <button className="leaveBtn" onClick={leaveRoom}>
-                        Leave Room
-                    </button>
-                </Link>
             </div>
 
             <div className="conversation-div">
