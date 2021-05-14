@@ -20,6 +20,7 @@ export const SocketContext = createContext({
   isTyping: "",
   joinRoom: (username, roomname) => {},
   createMessage: (message) => {},
+  createGiphy: (giphy) => {},
   getMessage: () => {},
   leaveRoom: () => {},
   joinLockedRoom: () => {},
@@ -67,6 +68,16 @@ class SocketProvider extends Component {
     }
     socket.emit("typing", userObject);
     socket.emit('chat-message', (userObject))
+  }
+
+  createGiphyToSocket = (giphy) => {
+    const userObject = {
+      giphy: giphy, 
+      name: this.state.currentUserRoom.username,
+      room: this.state.currentUserRoom.room
+    }
+    socket.emit("typing", userObject);
+    socket.emit('giphy-message', (userObject))
   }
  
   componentDidMount = () => {
@@ -135,6 +146,7 @@ class SocketProvider extends Component {
           leaveRoom: this.leaveRoom,
           joinRoom: this.joinRoomWithUsername,
           createMessage: this.createMessageToSocket,
+          createGiphy: this.createGiphyToSocket,
           joinLockedRoom: this.joinLockedRoom,
           handleUserName: this.setUserNameToState,
           isTypingTrue: this.setIsTypingTrue
