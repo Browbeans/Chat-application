@@ -4,7 +4,6 @@ import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/UserInput.css'
 import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
 import HttpsTwoToneIcon from "@material-ui/icons/HttpsTwoTone";
-import LockOpenTwoToneIcon from '@material-ui/icons/LockOpenTwoTone';
 
 function UserInput() {
   const history = useHistory()
@@ -29,25 +28,7 @@ function UserInput() {
     })
   }
 
-  // const lockedRoom = socketContext.joinLockedRoom();
-  // const lockedRooms = socketContext.lockedRooms;
-
-  // const specificLockedRoomName = (e) => {
-  //   lockedRooms.forEach((lr) => {
-  //   if (e.target.value === lr.roomname) {
-  //     setLocked(true);
-  //   }
-  // })};
-
-  // const specificLockedRoomPassword = (e) => {
-  //   lockedRooms.forEach((lr) => {
-  //     if (e.target.value === lr.password) {
-  //       setLocked(false);
-  //     }
-  //   })};
-  
   const handleChange = (e) => {
-    // specificLockedRoomName(e);
     setRoomName(e.target.value);
     const rooms = socketContext.allRooms
     rooms.forEach((room) => {
@@ -87,18 +68,6 @@ function UserInput() {
           id="roomname"
           onChange={(e) => handleChange(e)}
         />
-        {/* {locked ? (
-          <input
-            type="password"
-            placeholder="Enter password"
-            id="roomname"
-            onChange={e => handlePassword(e)}
-          />
-        ) : null}
-          {locked ? (
-            <button style={notActive}>Enter password</button>
-          ) : ( */}
-
           <Link
           style={{ textDecoration: "none", color: "white"}}
           onClick={handleSubmit}
@@ -159,11 +128,3 @@ function UserInput() {
 }
 
 export default UserInput;
-
-
-const active = {
-  background: 'green',
-}
-const notActive = {
-  background: "red",
-};

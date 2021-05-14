@@ -92,7 +92,7 @@ function Chat() {
                                             <p key={msg.text}>{msg.text}</p>
                                         </div>
                                         :
-                                        <div className="chat-message">
+                                        <div>
                                             <img style={{width: '10%', height: 'auto'}} src={msg.giphy} alt="" />
                                         </div>
                                         }
