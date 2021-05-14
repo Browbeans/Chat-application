@@ -1,5 +1,5 @@
 .current-rooms {
-    width: 14rem;
+    width: 20%;
     background: rgba(0, 0, 0, 0.5);
     min-height: 100vh;
     color: #22EAAA;
@@ -25,6 +25,8 @@
 
 @media screen and (max-width: 630px) {
     .current-rooms {
-        display: none;
+        width: 100%;
+        min-height: 35vh;
+        justify-content: center;
     }
 }
