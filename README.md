@@ -4,7 +4,7 @@
 
 This is a project made with Socket Io for users to create an account and room to chat with other users. The client-side is created with React. 
 
-The user can also create locked rooms with a password so that other users have to type in that password before joing that room.
+The user can also create locked rooms with a password so that other users have to type in that password before joining that room.
 
 ## Start Project
 
