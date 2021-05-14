@@ -9,4 +9,13 @@ function formatMessage(message) {
     }
 }
 
-module.exports = formatMessage
+function formatGiphy(giphy) {
+    return {
+        username: giphy.name,
+        giphy: giphy.giphy,
+        time: moment().format('h:mm a'), 
+        room: giphy.room
+    }
+}
+
+module.exports = { formatMessage, formatGiphy }

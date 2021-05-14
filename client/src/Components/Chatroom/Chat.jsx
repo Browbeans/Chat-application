@@ -14,6 +14,7 @@ function Chat() {
     const [message1, setMessage] = useState('');
     const [typing, setTyping] = useState("")
     const [isApi, setApi] = useState(false)
+    const [giphy, setGiphy] = useState('')
 
     const createMessage = (e) => {
         e.preventDefault();
@@ -38,6 +39,13 @@ function Chat() {
         axios.get('https://api.chucknorris.io/jokes/random')
         .then(function(response){
             socketContext.createMessage(response.data.value);
+        })
+    }
+
+    const getRandomGif = () => {
+        axios.get('https://api.unsplash.com/photos/random/?client_id=2cGzBSkm7Phibps9mLIUbfroOTD0kaKc6U98Jgw8Xzg')
+        .then(function(response) {
+            socketContext.createGiphy(response.data.urls.raw)
         })
     }
 
@@ -72,16 +80,22 @@ function Chat() {
                             ?
                             <div key={index}>
                                 <div>
-                                    {msg.text
+                                    {msg.time
                                     ?
                                     <div className="complete-message">
                                         <h3 class="name-h3" key={msg.username}>{msg.username}
                                             <span class="time-span" key={msg.time}>{msg.time}</span>
                                         </h3>
-
+                                        {msg.text
+                                        ?
                                         <div className="chat-message">
                                             <p key={msg.text}>{msg.text}</p>
                                         </div>
+                                        :
+                                        <div className="chat-message">
+                                            <img style={{width: '10%', height: 'auto'}} src={msg.giphy} alt="" />
+                                        </div>
+                                        }
                                         <div ref={messageEndRef}></div>
                                 </div>
                             :
@@ -110,7 +124,7 @@ function Chat() {
                 ? 
                 <ul style={{position: 'fixed', top: '70%'}}>
                     <li onClick={getChuckApi}>CHUCK NORRIS</li>
-                    {/* <li onClick={getApi}>API</li> */}
+                    <li onClick={getRandomGif}>Send random image</li>
                 </ul>
                 : 
                 <></>

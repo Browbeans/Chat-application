@@ -7,7 +7,7 @@ const socket = require('socket.io');
 const { getRoom, createRoom, allRooms, removeFromRoom } = require('./utils/rooms')
 const { userJoin, userLeave, getUser, getUserId } = require('./utils/users')
 
-const formatMessage = require('./utils/messages')
+const { formatMessage, formatGiphy} = require('./utils/messages')
 const PORT = process.env.PORT || 5000;
 
 const app = express(); 
@@ -62,6 +62,10 @@ io.on('connection', (socket) => {
     // User wrote message
     socket.on("chat-message", (message) => {
         io.to(message.room).emit('user-message', formatMessage(message)) 
+    });
+
+    socket.on("giphy-message", (giphy) => {
+        io.to(giphy.room).emit('user-message', formatGiphy(giphy)) 
     });
 
     socket.on('locked', () => {
