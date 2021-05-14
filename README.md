@@ -18,6 +18,6 @@ Fifth, type `npm start`, to view client-side in browser with live server.
 
 ## Created by:
 
-Hampus Olausson[https://github.com/HampusJohnOlausson], 
-Oliver Johansson[https://github.com/Browbeans],
-Petter Fogel[https://github.com/PetterFogel]
+[Hampus Olausson](https://github.com/HampusJohnOlausson), 
+[Oliver Johansson](https://github.com/Browbeans),
+[Petter Fogel](https://github.com/PetterFogel)
