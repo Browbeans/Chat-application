@@ -104,6 +104,22 @@ function Chat() {
                 </div>
             </div>
             <p>{typing}</p>
+            {isApi 
+                ? 
+                <div className="api-div">
+                    <ul>
+                        <div className="list">
+                        <li onClick={getChuckApi}>CHUCK NORRIS</li>
+                        </div>
+                        <div className="list">
+                        <li onClick={getRandomGif}>Send random image</li>
+                        </div>
+                    </ul>
+
+                </div>
+                : 
+                <></>
+            }
             <form className="input-div" onSubmit={(e) => createMessage(e)}>
                 <input
                     className="inputMessage"
@@ -112,15 +128,6 @@ function Chat() {
                     id="roomname"
                     onChange={(e) => {handleTyping(e)}}
                 />
-                {isApi 
-                ? 
-                <ul style={{position: 'fixed', top: '70%'}}>
-                    <li onClick={getChuckApi}>CHUCK NORRIS</li>
-                    <li onClick={getRandomGif}>Send random image</li>
-                </ul>
-                : 
-                <></>
-                }
                 <input type="submit" className="sendBtn" value="Send"/>
             </form>
         </div>

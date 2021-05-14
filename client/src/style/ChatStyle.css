@@ -136,6 +136,25 @@
     color: #22EAAA;
 }
 
+.api-div {
+    background: rgba(255, 255, 255, .4);
+    width: 10rem;
+    margin-left: 4rem;
+}
+
+.list:hover {
+    background: rgba(0, 0, 0, .3);
+}
+
+.api-div li {
+    list-style: none;
+    cursor: pointer;
+}
+
+.api-div ul {
+    padding: 0 0.3rem;
+}
+
 @media screen and (max-width: 630px) {
 
 .inputMessage {
@@ -153,4 +172,3 @@
     margin-left: 5rem;
 }
 
-}
