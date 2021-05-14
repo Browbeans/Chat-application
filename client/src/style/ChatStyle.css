@@ -37,6 +37,11 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
+.room-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .message-div {
    width: 90%;
    max-height: 40rem;
@@ -149,3 +154,21 @@
 .api-div ul {
     padding: 0 0.3rem;
 }
+
+@media screen and (max-width: 630px) {
+
+.inputMessage {
+    width: 70%;
+    height: 4rem;
+}
+
+.room-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leaveBtn{
+    margin-left: 5rem;
+}
+

@@ -4,7 +4,6 @@ import { SocketContext } from "../../Contexts/SocketContext";
 import '../../style/UserInput.css'
 import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
 import HttpsTwoToneIcon from "@material-ui/icons/HttpsTwoTone";
-import LockOpenTwoToneIcon from '@material-ui/icons/LockOpenTwoTone';
 
 function UserInput() {
   const history = useHistory()
@@ -29,25 +28,7 @@ function UserInput() {
     })
   }
 
-  // const lockedRoom = socketContext.joinLockedRoom();
-  // const lockedRooms = socketContext.lockedRooms;
-
-  // const specificLockedRoomName = (e) => {
-  //   lockedRooms.forEach((lr) => {
-  //   if (e.target.value === lr.roomname) {
-  //     setLocked(true);
-  //   }
-  // })};
-
-  // const specificLockedRoomPassword = (e) => {
-  //   lockedRooms.forEach((lr) => {
-  //     if (e.target.value === lr.password) {
-  //       setLocked(false);
-  //     }
-  //   })};
-  
   const handleChange = (e) => {
-    // specificLockedRoomName(e);
     setRoomName(e.target.value);
     const rooms = socketContext.allRooms
     rooms.forEach((room) => {
@@ -75,11 +56,11 @@ function UserInput() {
       <h1 className="welcomeText">
         Welcome to <span>ChatLine</span>
       </h1>
-      <div className="input-container">
+      <div className="input-container" style={{ flexDirection: "column" }}>
         <div className="inputs">
 
         <h4 className="user">{socketContext.userName}</h4>
-        <h3 className="JoinRoomText">Join or create a locked Room</h3>
+        <h3 className="JoinRoomText">Create a public room</h3>
 
         <input
           type="text"
@@ -87,28 +68,16 @@ function UserInput() {
           id="roomname"
           onChange={(e) => handleChange(e)}
         />
-        {/* {locked ? (
-          <input
-            type="password"
-            placeholder="Enter password"
-            id="roomname"
-            onChange={e => handlePassword(e)}
-          />
-        ) : null}
-          {locked ? (
-            <button style={notActive}>Enter password</button>
-          ) : ( */}
-
           <Link
           style={{ textDecoration: "none", color: "white"}}
           onClick={handleSubmit}
           to={`/chatRoom?name=${username}&room=${roomname}`}
              >
-            <button>Create and join... <LockOpenTwoToneIcon/></button>
+            <button>Join</button>
             </Link>
           {/* )} */}
           <div>
-          <h3 className="JoinRoomText">Join or create a locked Room</h3>
+          <h3 className="JoinRoomText">Create a locked room</h3>
           <input
               type="text"
               placeholder="Enter roomname"
@@ -145,7 +114,7 @@ function UserInput() {
                 to={`/chatRoom?name=${username}&room=${roomname}`}
               >
                 <button>
-                  Create and join... <HttpsTwoToneIcon/>
+                  Join <HttpsTwoToneIcon/>
                 </button>
               </Link>
             </div>
@@ -159,11 +128,3 @@ function UserInput() {
 }
 
 export default UserInput;
-
-
-const active = {
-  background: 'green',
-}
-const notActive = {
-  background: "red",
-};
